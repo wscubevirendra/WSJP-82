@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Document</title>
+    <style>
+        .group {
+            margin-top: 20px;
+            margin-left: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <form>
+        <div class="group">
+            <label for="userName">Name:-</label>
+            <input id="userName" placeholder="Your Name" required name="userName" type="text">
+        </div>
+        <div class="group">
+            <label>Email</label>
+            <input placeholder="Email" name="userEmail" required disabled type="email">
+        </div>
+        <div class="group">
+            <label>Password</label>
+            <input min="18" max="50" type="number">
+        </div>
+        <div class="group">
+            <label>City</label>
+            <select id="city">
+                <option  value="">city</option>
+                <option value="jiapur">Jaipur</option>
+                <option value="jodhpur">Jodhpur</option>
+                <option>Jodhpur</option>
+                <option>Sikar</option>
+            </select>
+
+        </div>
+        <div class="group">
+            <label for="">Gender</label>
+            <input name="gender" type="radio">
+            <label>Male</label>
+            <input name="gender" type="radio">
+            <label>Female</label>
+
+
+
+
+        </div>
+        <button class="group" type="submit">Submit</button>
+    </form>
+
+</body>
+
+</html>
