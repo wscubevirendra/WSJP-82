@@ -1,0 +1,145 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+html{
+    scroll-behavior: smooth;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+body {
+    background-image: url("../images/waves.jpg");
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-attachment: fixed;
+}
+
+main {
+    width: 1000px;
+    height: 2000px;
+    /* border: 2px solid red; */
+    margin: auto;
+
+}
+
+header {
+    width: 100%;
+    height: 660px;
+    /* border: 2px solid gold; */
+    background: url(../images/headerbg.jpg) 10% 0 no-repeat fixed;
+    background-size: cover;
+
+
+}
+
+.top-container {
+    width: 100%;
+    height: 100%;
+    background: url(../images/gridtile.png);
+    background-repeat: repeat;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    color: white;
+}
+
+/* nav{
+    border: 2px solid red;
+} */
+nav ul {
+    list-style: none;
+    display: flex;
+}
+
+.top-container h2 {
+    font-weight: lighter;
+    width: 370px;
+    border: 2px #27E0FF solid;
+    font-size: 36px;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 20px 0px;
+    border-left: none;
+    border-right: none;
+
+}
+
+nav ul li {
+    border-right: #fff 2px solid;
+    padding: 12px 39px;
+    font-size: 14px;
+    font-weight: 800;
+}
+
+section {
+    width: 1000px;
+    height: 931px;
+    /* border: 2px solid gold; */
+}
+
+#home .top-middle-section {
+    width: 1000px;
+    height: 321px;
+    /* border: 2px dashed darkcyan; */
+    background: #fcf5ed url(../images/3.jpg) center center no-repeat fixed;
+}
+
+#about .top-middle-section {
+    width: 1000px;
+    height: 321px;
+    /* border: 2px dashed darkcyan; */
+    background: #fcf5ed url(../images/1.jpg) center center no-repeat fixed;
+}
+
+#services .top-middle-section{
+    width: 1000px;
+    height: 321px;
+    /* border: 2px dashed darkcyan; */
+    background: #fcf5ed url(../images/2.jpg) center center no-repeat fixed;
+}
+
+ .bottom-middle-section {
+    width: 100%;
+    height: 610px;
+    /* border: 2px double tomato; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background-color: white;
+    font-size: 17px;
+    color: #182D55;
+    padding: 60px 10px;
+    text-align: center;
+
+}
+
+
+
+.black-color-overlay {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu-title {
+    height: 40px;
+    border: #FFF 8px solid;
+    font-size: 26px;
+    color: white;
+    padding:0px 12px;
+    font-weight: bold;
+    text-align: center;
+   
+}
