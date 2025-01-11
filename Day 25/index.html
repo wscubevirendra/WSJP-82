@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Document</title>
+    <style>
+        div {
+            display: flex;
+            justify-content: center;
+            margin: 200px auto;
+        }
+
+        button {
+            width: 200px;
+            padding: 20px;
+            background-color: red;
+            position: relative;
+
+        }
+      
+
+        button::before{
+            content: "";
+            width: 20px;
+            height: 20px;
+            background-color: red;
+            position: absolute;
+            left: 50%;
+            top: -10px;
+            transform: rotate(45deg);
+        }
+
+        button::after{
+            content: "";
+            width: 20px;
+            height: 20px;
+            background-color: red;
+            position: absolute;
+            left: 50%;
+            bottom: -10px;
+            transform: rotate(45deg);
+
+
+
+
+        }
+
+
+
+       
+    </style>
+</head>
+
+<body>
+    <div>
+        <button></button>
+       
+    </div>
+
+</body>
+
+</html>

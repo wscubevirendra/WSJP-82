@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .main {
+            width: 900px;
+            height: 500px;
+            border: 2px solid red;
+            display: flex;
+            margin: 10px auto;
+        }
+
+        .box {
+            width: 200px;
+            height: 200px;
+            border: 2px solid blue;
+            transition: 3s;
+
+        }
+
+        .main:hover .box{
+            transform: translate(700px,300px);
+            background-color: red;
+        }
+
+       
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <div class="box">
+            1
+        </div>
+      
+
+    </div>
+</body>
+
+</html>
