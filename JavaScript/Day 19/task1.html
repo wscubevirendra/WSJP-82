@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        .container {
+            width: 1100px;
+            /* border: 2px solid red; */
+            margin: auto;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .item {
+            width: 200px;
+            height: 200px;
+            box-shadow: 0px 0px 2px gray;
+            text-align: center;
+
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+    </div>
+
+    <script>
+        var container = document.querySelector(".container")
+        for (var i = 1; i <= 20; i++) {
+            var divTag = document.createElement("div");
+            divTag.classList.add("item")
+            if (i <= 5) {
+                divTag.innerHTML = `<img src="https://picsum.photos/200/300?random=${i}">`
+            }
+            divTag.innerText = "Hello"
+
+            container.appendChild(divTag)
+
+        }
+    </script>
+</body>
+
+</html>

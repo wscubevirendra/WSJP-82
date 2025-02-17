@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Document</title>
+    <style>
+        #demo {
+            background-color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 id="demo">Minakshi</h1>
+    <button onclick="changeValue()">Click</button>
+
+    <script>
+        var demo = document.getElementById("demo")
+
+
+        function changeValue() {
+            demo.innerText = "Hello"
+            demo.style.backgroundColor="green"
+            demo.style.color="white"
+        }
+    </script>
+
+</body>
+
+</html>

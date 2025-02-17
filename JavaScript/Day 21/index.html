@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        .container {
+            width: 1000px;
+            height: 400px;
+            margin: 50px auto;
+            box-shadow: 0px 0px 2px gray;
+            background-color: white;
+            overflow: hidden;
+            display: flex;
+
+        }
+
+        .item {
+            width: 33%;
+            height: 100%;
+            /* transform: translateY(); */
+            transition: 0.6s;
+            transition-timing-function: linear;
+            flex-shrink: 0;
+            padding: 10px;
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+        }
+
+
+
+        .my-btn button {
+            background-color: lightcoral;
+            padding: 10px;
+            border-radius: 20px;
+            margin-left: 400px;
+            cursor: pointer;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="item">
+            <img src="4.avif" alt="">
+        </div>
+        <div class="item">
+            <img src="2.avif" alt="">
+        </div>
+        <div class="item">
+            <img src="3.avif" alt="">
+        </div>
+        <div class="item">
+            <img src="4.avif" alt="">
+        </div>
+        <div class="item">
+            <img src="1.avif" alt="">
+        </div>
+
+    </div>
+    <div class="my-btn">
+        <button>Prev</button>
+        <button>Next</button>
+    </div>
+
+    <script>
+        const btn = document.querySelectorAll("button");
+        const images = document.querySelectorAll(".item");
+
+        var poe = 0
+        btn[1].addEventListener(
+            "click",
+            function (e) {
+                if (images.length - 2 == poe) {
+                    btn[1].disabled = true
+                    btn[0].disabled = false
+                    return true
+                }
+                poe++
+                for (img of images) {
+                    img.style.transform = `translateX(-${poe * 100}%)`
+
+                }
+            }
+        )
+
+        btn[0].addEventListener(
+            "click",
+            function (e) {
+                if (poe == 0) {
+                    return btn[0].disabled = true
+                }
+                poe--
+                for (img of images) {
+                    img.style.transform = `translateX(-${poe * 100}%)`
+
+                }
+            }
+        )
+
+    </script>
+
+</body>
+
+</html>

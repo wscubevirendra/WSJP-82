@@ -1,0 +1,47 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.container {
+    width: 800px;
+    min-height: 500px;
+    margin: auto;
+    box-shadow: 0px 0px 2px gray;
+    background-color: white;
+    margin-top: 20px;
+    padding: 10px;
+}
+
+#inp {
+    width: 100%;
+    padding: 10px;
+    margin-top: 2px;
+
+}
+
+#tudoList {
+    list-style: none;
+    margin-top: 20px;
+}
+
+#tudoList li {
+    width: 100%;
+    padding: 10px;
+    background-color: lightblue;
+    position: relative;
+    margin-bottom: 10px;
+}
+
+#tudoList li span {
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+}
+
+.demo {
+    text-decoration: line-through;
+    background-color: red !important;
+}

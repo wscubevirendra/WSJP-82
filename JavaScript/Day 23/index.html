@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        .container {
+            width: 100%;
+            /* height: 600px; */
+            /* border: 2px solid red; */
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: auto;
+            padding: 50px;
+
+        }
+
+        body {
+            width: 100%;
+            height: 100%;
+            transition: 1s;
+        }
+
+        .box {
+            width: 18%;
+            height: 200px;
+            /* border: 2px solid green; */
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 22px;
+            cursor: pointer;
+        }
+
+        .overlay {
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            transform: scale(0);
+            background-color: red;
+            transition: 0.6s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 50px;
+
+        }
+    </style>
+</head>
+
+<body id="body">
+
+
+    <div class="container">
+
+    </div>
+    <div class="overlay"></div>
+    <audio id="playSound" src="music.wav"></audio>
+
+    <script>
+        var container = document.querySelector(".container");
+        var overlay = document.querySelector(".overlay");
+        var playSound = document.querySelector("#playSound")
+        var body = document.querySelector("#body")
+
+        var message = ["Copied", "Well Done", "Wow", "Paste me", "Maja a gya"]
+        // for (var i = 1; i <= 20; i++) {
+        //     var box = document.createElement("div");
+        //     box.classList.add("box");
+        //     container.appendChild(box);
+        //     //HEX Code 
+        //     var r = parseInt(Math.random() * 256).toString(16).padStart(2, "0");
+        //     var g = parseInt(Math.random() * 256).toString(16).padStart(2, "0");
+        //     var b = parseInt(Math.random() * 256).toString(16).padStart(2, "0");
+        //     var code = "#" + r + g + b;
+        //     box.style.backgroundColor = code
+        //     box.innerText = code
+        //     box.addEventListener(
+        //         "click",
+        //         function (e) {
+        //             navigator.clipboard.writeText(e.target.innerText)
+        //             overlay.style.backgroundColor = e.target.innerText
+        //             overlay.style.transform = "scale(1)"
+        //             playSound.play()
+        //             // overlay.innerText = e.target.innerText
+        //             overlay.innerText = message[parseInt(Math.random() * message.length)]
+        //             setTimeout(
+        //                 function () {
+        //                     overlay.style.transform = "scale(0)"
+        //                 },
+        //                 1000
+        //             );
+
+        //         }
+        //     )
+
+
+        // }
+
+
+        // body.addEventListener(
+        //     "mousemove",
+        //     function (e) {
+        //         const x = e.clientX / window.innerWidth;
+        //         const y = e.clientY / window.innerHeight;
+        //         const r = Math.floor(x * 255);
+        //         const g = Math.floor(y * 255);
+        //         const b = Math.floor((2 - y) * 255);
+
+        //         body.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+
+
+        //     }
+        // )
+    </script>
+
+</body>
+
+</html>

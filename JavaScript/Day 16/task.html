@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Document</title>
+</head>
+
+<body>
+<div class="box">1</div>
+<div class="box">2</div>
+<div class="box">3</div>
+<div class="box">4</div>
+<div class="box">5</div>
+
+    <button onclick="demo()">Click</button>
+    <script>
+        var box = document.getElementsByClassName("box");
+      
+
+        function demo() {
+            box[3].innerText = "Hello"
+        }
+
+    </script>
+</body>
+
+</html>

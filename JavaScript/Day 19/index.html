@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 400px;
+            height: 200px;
+            border: 2px solid red;
+            text-align: center;
+            padding-top: 100px;
+            box-sizing: border-box;
+        }
+
+        .demo {
+            background-color: green;
+            color: white;
+            font-size: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        Hello
+    </div>
+    <button onclick="styleChange()">Add</button>
+    <button onclick="styleRemove()">Remove</button>
+    <button onclick="toggleHandler()">Toggle</button>
+
+    <script>
+        var box = document.querySelector(".box");
+
+        function styleChange() {
+            box.classList.add("demo")
+        }
+        function styleRemove() {
+            box.classList.remove("demo")
+        }
+
+        function toggleHandler() {
+            box.classList.toggle("demo")
+        }
+    </script>
+</body>
+
+</html>

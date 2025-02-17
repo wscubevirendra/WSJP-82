@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="password" name="" id="inp">
+    <button onclick="toggleHanlder()">Show password</button>
+
+    <script>
+        var inp = document.getElementById("inp");
+
+
+        function toggleHanlder() {
+            if (inp.type == "password") {
+                inp.type = "text"
+            }else{
+                inp.type = "password"
+            }
+
+        }
+    </script>
+</body>
+
+</html>

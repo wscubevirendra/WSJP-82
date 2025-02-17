@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+
+<body id="bodytag">
+    <button onclick="changeMode(1)">Dark Mode</button>
+    <button onclick="changeMode(2)">Light Mode</button>
+    <h1>WsCube Tech -Jaipur</h1>
+    <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut impedit, molestiae repellendus reprehenderit
+        architecto natus soluta iste qui commodi, tempore accusamus velit, fugiat non voluptates ullam temporibus autem!
+        Eius, expedita.
+        Culpa velit molestias, minima expedita maxime ipsam possimus quisquam aut rem sint esse aperiam dicta dolorem
+        quis et eius ea sapiente deleniti quam. At maiores sed similique, eligendi fuga ipsum.
+    </p>
+    <ol>
+        <li>Item1</li>
+        <li>Item1</li>
+        <li>Item1</li>
+        <li>Item1</li>
+    </ol>
+
+    <script>
+        var bodytag = document.getElementById("bodytag");
+
+        function changeMode(flag) {
+            if (flag == 1) {
+                bodytag.style.background = "black";
+                bodytag.style.color = "white"
+            } else {
+                bodytag.style.background = "white";
+                bodytag.style.color = "black"
+            }
+
+        }
+
+
+
+    </script>
+</body>
+
+</html>

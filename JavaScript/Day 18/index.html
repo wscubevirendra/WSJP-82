@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        .container {
+            width: 1000px;
+            height: 600px;
+            /* border: 2px solid red; */
+            margin: 30px auto;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .card {
+            width: 48%;
+            height: 100%;
+            /* border: 2px solid green; */
+            box-shadow: 0px 2px 2px gray;
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+            gap: 40px;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 4px;
+        }
+
+        .card:nth-child(1) {
+            background-color: lightblue;
+        }
+
+        .card:nth-child(2) {
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        button {
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="card">
+            <div>
+                <label for="">To</label>
+                <input onkeyup="getValue(this,0)" type="text">
+            </div>
+            <div>
+                <label for="">Msg</label>
+                <textarea onkeyup="getValue(this,1)" name="" id=""></textarea>
+            </div>
+            <div>
+                <label for="">From</label>
+                <input onkeyup="getValue(this,2)" type="text">
+            </div>
+            <div>
+                <label for="">Background image</label>
+                <input type="text" onchange="designCard(this.value,1)">
+            </div>
+            <div>
+                <label for="">Text color</label>
+                <input type="color" onchange="designCard(this.value,2)">
+            </div>
+            <div style="display: flex; gap: 20px;">
+                <button onclick="fontsizeHandler(1)">+</button>
+                <input value="16" type="text" id="font">
+                <button onclick="fontsizeHandler(2)">-</button>
+            </div>
+        </div>
+        <div class="card">
+            <h1 class="output">To:-</h1>
+            <p class="output">Msg:-</p>
+            <h1 class="output">From:-</h1>
+        </div>
+
+    </div>
+
+    <script>
+        var outputs = document.getElementsByClassName("output");
+        var card = document.getElementsByClassName("card");
+        var font = document.getElementById("font");
+        function getValue(element, flag) {
+            var Output_Name;
+            if (flag == 0) {
+                Output_Name = "To"
+            } else if (flag == 1) {
+                Output_Name = "Message"
+
+            } else if (flag == 2) {
+                Output_Name = "From"
+
+            }
+
+            outputs[flag].innerText = `${Output_Name}:-${element.value}`
+
+        }
+
+        function designCard(value, flag) {
+            if (flag == 1) {
+                card[1].style.backgroundImage = `url(${value})`
+
+            } else {
+                card[1].style.color = value
+            }
+
+        }
+
+        var count = 16;
+        function fontsizeHandler(flag) {
+            if (flag == 1) {
+                count++
+            } else {
+                count--
+            }
+
+            card[1].style.fontSize = count + "px"
+            font.value = count
+        }
+    </script>
+
+</body>
+
+</html>

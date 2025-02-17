@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Document</title>
+    <style>
+        .container {
+            width: 300px;
+            height: 300px;
+            margin: auto;
+            border: 2px solid red;
+        }
+
+        #myimg {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <img id="myimg" src="https://cdn.pixabay.com/photo/2015/11/03/09/03/question-mark-1019993_640.jpg" alt="">
+    </div>
+    <div id="heading">
+        Hello
+    </div>
+    <button onclick="changeImage()">Best Movie</button>
+
+    <script>
+        var myImg = document.getElementById("myimg");
+        var heading = document.getElementById("heading");
+
+
+        function changeImage() {
+            myImg.src = "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRTqe-sagxelFIsAWDAdPFgIPQNyB94iSAFvLoI5Hi7ojnqoZVf38OVZlDiiBhwBYsmASbo"
+            heading.innerHTML="<h1>Aman</h1>"
+        }
+
+
+    </script>
+</body>
+
+</html>

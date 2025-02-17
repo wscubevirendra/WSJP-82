@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Improved Form UI</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        form {
+            width: 400px;
+            background: white;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            padding: 30px;
+        }
+
+        .group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            font-size: 16px;
+            color: #333;
+        }
+
+        input {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            border-color: blueviolet;
+            outline: none;
+            box-shadow: 0px 0px 5px rgba(138, 43, 226, 0.5);
+        }
+
+        button {
+            background-color: blueviolet;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: indigo;
+        }
+
+        .group span {
+            color: red;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+    <form id="userForm">
+        <div class="group">
+            <label for="name">Name</label>
+            <input type="text" id="name" placeholder="Enter your name">
+            <span id="nameError"></span>
+        </div>
+        <div class="group">
+            <label for="email">Email</label>
+            <input type="text" id="email" placeholder="Enter your email">
+            <span id="emailError"></span>
+
+        </div>
+        <div class="group">
+            <label for="contact">contact</label>
+            <input type="text" id="contact" placeholder="Enter your contact">
+            <span id="contactError"></span>
+
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+    <script>
+        var userForm = document.querySelector("#userForm");
+        userForm.addEventListener(
+            "submit",
+            function (e) {
+                e.preventDefault();
+                var name = document.querySelector("#name").value.trim();
+                var email = document.querySelector("#email").value.trim();
+                var contact = document.querySelector("#contact").value.trim();
+                var nameError = document.querySelector("#nameError");
+                var emailError = document.querySelector("#emailError");
+                var contactError = document.querySelector("#contactError");
+                var emailReg = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+                var contactReg=/^[6-9]\d{9}$/
+
+
+                var errors = {
+
+                }
+
+                if (!name) {
+                    errors.name = "Name is Required"
+                }
+
+                if (!email) {
+                    errors.email = "Email is Required"
+                } else if (!emailReg.test(email)) {
+                    console.log("hello")
+                    errors.email = "Email is invalid"
+
+                }
+
+                if (!contact) {
+                    errors.contact = "contact is Required"
+                }else if (!contactReg.test(contact)) {
+                   
+                    errors.contact = "invalid contact number"
+
+                }
+
+              
+
+                nameError.innerText = errors.name || ""
+                emailError.innerText = errors.email || ""
+                contactError.innerText = errors.contact || ""
+
+                if (Object.keys(errors).length == 0) {
+                    alert("Form Submit")
+                }
+
+
+
+            }
+        )
+
+    </script>
+</body>
+
+</html>
