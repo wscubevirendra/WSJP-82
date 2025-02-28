@@ -75,54 +75,41 @@
         var body = document.querySelector("#body")
 
         var message = ["Copied", "Well Done", "Wow", "Paste me", "Maja a gya"]
-        // for (var i = 1; i <= 20; i++) {
-        //     var box = document.createElement("div");
-        //     box.classList.add("box");
-        //     container.appendChild(box);
-        //     //HEX Code 
-        //     var r = parseInt(Math.random() * 256).toString(16).padStart(2, "0");
-        //     var g = parseInt(Math.random() * 256).toString(16).padStart(2, "0");
-        //     var b = parseInt(Math.random() * 256).toString(16).padStart(2, "0");
-        //     var code = "#" + r + g + b;
-        //     box.style.backgroundColor = code
-        //     box.innerText = code
-        //     box.addEventListener(
-        //         "click",
-        //         function (e) {
-        //             navigator.clipboard.writeText(e.target.innerText)
-        //             overlay.style.backgroundColor = e.target.innerText
-        //             overlay.style.transform = "scale(1)"
-        //             playSound.play()
-        //             // overlay.innerText = e.target.innerText
-        //             overlay.innerText = message[parseInt(Math.random() * message.length)]
-        //             setTimeout(
-        //                 function () {
-        //                     overlay.style.transform = "scale(0)"
-        //                 },
-        //                 1000
-        //             );
+        for (var i = 1; i <= 20; i++) {
+            var box = document.createElement("div");
+            box.classList.add("box");
+            container.appendChild(box);
+            //HEX Code x
+            var r = parseInt(Math.random() * 256).toString(16).padStart(2, "0");
+            var g = parseInt(Math.random() * 256).toString(16).padStart(2, "0");
+            var b = parseInt(Math.random() * 256).toString(16).padStart(2, "0");
+            var code = "#" + r + g + b;
+            box.style.backgroundColor = code
+            box.innerText = code
+            box.addEventListener(
+                "click",
+                function (e) {
+                    navigator.clipboard.writeText(e.target.innerText)
+                    overlay.style.backgroundColor = e.target.innerText
+                    overlay.style.transform = "scale(1)"
+                    playSound.play()
+                    // overlay.innerText = e.target.innerText
+                    overlay.innerText = message[parseInt(Math.random() * message.length)]
+                    setTimeout(
+                        function () {
+                            overlay.style.transform = "scale(0)"
+                        },
+                        1000
+                    );
 
-        //         }
-        //     )
-
-
-        // }
+                }
+            )
 
 
-        // body.addEventListener(
-        //     "mousemove",
-        //     function (e) {
-        //         const x = e.clientX / window.innerWidth;
-        //         const y = e.clientY / window.innerHeight;
-        //         const r = Math.floor(x * 255);
-        //         const g = Math.floor(y * 255);
-        //         const b = Math.floor((2 - y) * 255);
-
-        //         body.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+        }
 
 
-        //     }
-        // )
+      
     </script>
 
 </body>

@@ -21,8 +21,6 @@
     //     result = "CIBIL score is average"
     // } else {
     //     result = "CIBIL score is poor"
-
-
     // }
 
 
@@ -36,17 +34,20 @@
     //10/100=0.1
     // }
 
-    // var principle = 10000;
-    // var rate = 5
-    // var time = 2
+    var principle = 10000;
+    var rate = 5
+    var time = 12
 
-    // var simpleInterest = (principle * rate * time) / 100;
-    // if (time < 1) {
-    //     var discount = simpleInterest * 0.1
-    //     principle = principle - discount
-    // }
+    var simpleInterest = (principle * rate * time) / 100;
+    var principle = principle + simpleInterest
+    if (time < 12) {
+        var discount = simpleInterest * 0.1
+        principle = principle - discount
+    }else{
 
-    // console.log(principle)
+    }
+
+   
 
 
     // var unit = Number(prompt("unit"));  //50
@@ -64,16 +65,16 @@
     // console.log("total charges rs " + (totalCharge + 50))
 
 
-    var num1 = Number(prompt("num1"));
-    var num2 = Number(prompt("num2"));
-    var num3 = Number(prompt("num3"));
-    if (num1 > num2 && num1 > num3) {
-        console.log("num1")
-    } else if (num2 > num1 && num2 > num3) {
-        console.log("num2")
-    } else {
-        console.log("num3")
-    }
+    // var num1 = Number(prompt("num1"));
+    // var num2 = Number(prompt("num2"));
+    // var num3 = Number(prompt("num3"));
+    // if (num1 > num2 && num1 > num3) {
+    //     console.log("num1")
+    // } else if (num2 > num1 && num2 > num3) {
+    //     console.log("num2")
+    // } else {
+    //     console.log("num3")
+    // }
 
 
 </script>

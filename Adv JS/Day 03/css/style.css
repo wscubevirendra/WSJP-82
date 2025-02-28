@@ -1,0 +1,29 @@
+body {
+    width: 100%;
+    height: 100%;
+    background-color: black;
+}
+
+#inp {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+#inp input {
+    width: 500px;
+    margin: 10px 0px;
+    border-radius: 20px;
+    padding: 10px;
+}
+
+input:focus {
+    outline: none;
+    border: none;
+}
+
+img{
+    width: 100%;
+    height: 380px;
+}

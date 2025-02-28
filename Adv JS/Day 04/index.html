@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        .form-container {
+            max-width: 600px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            /* border: 2px solid red; */
+            margin: auto;
+        }
+
+        .form-container h2 {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .form-group input:focus {
+            border-color: #007BFF;
+            outline: none;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: #007BFF;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .submit-btn:hover {
+            background: #0056b3;
+        }
+
+
+
+        .card>div {
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 15px;
+
+            /* width: 320px; */
+            text-align: center;
+
+
+        }
+
+        .card h3 {
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            margin: 5px 0;
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-xl">
+        <div class="form-container">
+            <h2>Contact Form</h2>
+            <form id="contactForm">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email">
+                </div>
+                <div class="form-group">
+                    <label for="contact">Contact:</label>
+                    <input type="tel" id="contact" name="contact">
+                </div>
+                <button type="submit" class="submit-btn">Submit</button>
+            </form>
+        </div>
+        <div class="row">
+
+
+        </div>
+
+    </div>
+
+    <script>
+        const contactForm = document.querySelector("#contactForm");
+        const row = document.querySelector(".row");
+        contactForm.addEventListener(
+            "submit",
+            (event) => {
+                event.preventDefault();
+                const data = {
+                    name: event.target.name.value,
+                    email: event.target.email.value,
+                    contact: event.target.contact.value,
+                }
+
+                const getuser = JSON.parse(localStorage.getItem("users")) ?? [];
+                const newData = [...getuser, data]
+
+
+                localStorage.setItem("users", JSON.stringify(newData))
+                showData()
+            }
+        )
+
+
+        function showData() {
+            const getuser = JSON.parse(localStorage.getItem("users")) ?? [];
+            row.innerHTML=""
+            getuser.forEach(
+                (data, index) => {
+                    const box = document.createElement("div");
+                    box.classList.add("col-3")
+                    box.classList.add("card")
+                    box.innerHTML = ` <div>
+                <p><strong>Name:</strong> <span id="cardName">${data.name}</span></p>
+                <p><strong>Email:</strong> <span id="cardEmail">${data.email}</span></p>
+                <p><strong>Contact:</strong> <span id="cardContact">${data.contact}</span></p></div>`
+
+                    row.appendChild(box)
+                }
+
+            )
+        }
+        showData()
+
+    </script>
+</body>
+
+</html>
