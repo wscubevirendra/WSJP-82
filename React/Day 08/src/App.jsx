@@ -3,6 +3,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Product from './Product'
 import Layout from './Layout'
 import ProductDetails from './ProductDetails'
+import Cart from './Cart'
 
 export default function App() {
   const router = createBrowserRouter([
@@ -17,6 +18,10 @@ export default function App() {
         {
           path: "/productDetails/:productId",
           element: <ProductDetails />
+        },
+        {
+          path: "/cart",
+          element: <Cart />
         }
       ]
     }
