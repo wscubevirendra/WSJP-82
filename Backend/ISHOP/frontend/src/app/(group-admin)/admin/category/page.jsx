@@ -1,107 +1,65 @@
-'use client'
+import { FiEdit, FiPlus } from "react-icons/fi";
+import Link from "next/link";
+import { getCategory } from "@/app/library/api-call";
+import DeleteBtn from "@/component/admin/DeleteBtn";
+import StatusBtn from "@/component/admin/StatusBtn";
 
-import React, { useState } from 'react';
-import { FaEdit, FaTrash, FaSyncAlt, FaPlus } from 'react-icons/fa';
-import Link from 'next/link';
+export default async function ViewCategoryPage() {
+  const categoryJSON = await getCategory();
+  const categories = await categoryJSON?.categories
 
-export default function CategoryView() {
-  const [categories, setCategories] = useState([
-    { id: 1, name: 'Electronics', status: 'Active' },
-    { id: 2, name: 'Clothing', status: 'Inactive' },
-    { id: 3, name: 'Home Appliances', status: 'Active' },
-  ]);
-
-  const handleDelete = (id) => {
-    setCategories(categories.filter((category) => category.id !== id));
-  };
-
-  const handleToggleStatus = (id) => {
-    setCategories(categories.map((category) =>
-      category.id === id
-        ? { ...category, status: category.status === 'Active' ? 'Inactive' : 'Active' }
-        : category
-    ));
-  };
-
-  const handleCreateCategory = () => {
-    // Just adding a dummy category for now
-    const newCategory = {
-      id: categories.length + 1,
-      name: `New Category ${categories.length + 1}`,
-      status: 'Active',
-    };
-    setCategories([...categories, newCategory]);
-  };
 
   return (
     <div className="p-6">
-      {/* Top Section: Title + Create Button */}
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold text-gray-800">Category List</h1>
-       <Link href="/admin/category/add">
-       <button
-          onClick={handleCreateCategory}
-          className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg shadow transition"
-        >
-          <FaPlus />
-          Create Category
-        </button>
-       </Link>
-      </div>
+      <div className="bg-white rounded-2xl shadow-md p-6">
+        {/* Header */}
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-xl font-semibold text-gray-700">Category / View</h2>
 
-      {/* Table */}
-      <div className="overflow-x-auto">
-        <table className="min-w-full bg-white border border-gray-200 rounded-lg shadow-md">
-          <thead>
-            <tr className="bg-gray-100 text-left">
-              <th className="px-6 py-3 border-b">ID</th>
-              <th className="px-6 py-3 border-b">Name</th>
-              <th className="px-6 py-3 border-b">Status</th>
-              <th className="px-6 py-3 border-b">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {categories.map((category) => (
-              <tr key={category.id} className="hover:bg-gray-50">
-                <td className="px-6 py-4 border-b">{category.id}</td>
-                <td className="px-6 py-4 border-b">{category.name}</td>
-                <td className="px-6 py-4 border-b">
-                  <span
-                    className={`px-3 py-1 rounded-full text-sm ${category.status === 'Active'
-                      ? 'bg-green-100 text-green-700'
-                      : 'bg-red-100 text-red-700'
-                      }`}
-                  >
-                    {category.status}
-                  </span>
-                </td>
-                <td className="px-6 py-4 border-b flex space-x-3">
-                  <button
-                    className="text-blue-500 hover:text-blue-700"
-                    title="Edit"
-                  >
-                    <FaEdit />
-                  </button>
-                  <button
-                    className="text-green-500 hover:text-green-700"
-                    title="Toggle Status"
-                    onClick={() => handleToggleStatus(category.id)}
-                  >
-                    <FaSyncAlt />
-                  </button>
-                  <button
-                    className="text-red-500 hover:text-red-700"
-                    title="Delete"
-                    onClick={() => handleDelete(category.id)}
-                  >
-                    <FaTrash />
-                  </button>
-                </td>
+          <Link className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white text-sm rounded-lg hover:bg-blue-700 transition" href="/admin/category/add">  <FiPlus className="text-lg" />
+            Add Category</Link>
+
+        </div>
+        <div className="overflow-x-auto">
+          <table className="min-w-full text-sm">
+            <thead className="bg-gray-100 text-gray-700 uppercase text-xs">
+              <tr>
+                <th className="p-4 text-left">ID</th>
+                <th className="p-4 text-left">Name</th>
+                <th className="p-4 text-left">Slug</th>
+                <th className="p-4 text-left">Image</th>
+                <th className="p-4 text-left">Status</th>
+                <th className="p-4 text-center">Actions</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
+            </thead>
+            <tbody className="text-gray-600">
+              {/* Example rows */}
+              {Array.isArray(categories) && categories.map((cat, index) => (
+                <tr key={cat._id} className=" shadow hover:bg-gray-50">
+                  <td className="p-4">{index + 1}</td>
+                  <td className="p-4 font-medium">{cat.name}</td>
+                  <td className="p-4">{cat.slug}</td>
+                  <td className="p-4">
+                    <img width='25px' src={`${process.env.NEXT_PUBLIC_API_BASE_URL}images/category/${cat.categoryImage}`} alt="" />
+                  </td>
+                  <td className="p-4">
+                    <StatusBtn statusURl={`category/status/${cat?._id}`} status={cat.status} />
+                  </td>
+
+                  <td className="p-4 flex justify-center gap-4">
+                    <Link href={`/admin/category/edit/${cat?._id}`}>
+                      <button className="text-yellow-500 hover:text-yellow-600 transition">
+                        <FiEdit className="text-lg" />
+                      </button>
+                    </Link>
+                    <DeleteBtn deleteURL={`category/delete/${cat?._id}`} />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div >
+    </div >
   );
 }

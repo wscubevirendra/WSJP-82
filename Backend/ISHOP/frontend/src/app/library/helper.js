@@ -1,3 +1,10 @@
+import { toast } from "react-toastify";
+import axios from "axios";
+
+
+const axiosApiInstance = axios.create({
+    baseURL: process.env.NEXT_PUBLIC_API_BASE_URL
+})
 
 function createSlug(text) {
     return text
@@ -11,4 +18,7 @@ function createSlug(text) {
         .replace(/-+$/, ''); // Trim - from end of text
 }
 
-export { createSlug };
+const notify = (msg, flag) => toast(msg, { type: flag ? "success" : "error" });
+
+
+export { createSlug, notify, axiosApiInstance };
