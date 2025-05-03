@@ -27,7 +27,7 @@ export default function AddCategoryPage() {
         }
       })
       .catch((err) => {
-        console.log(err);
+        notify("Something went wrong", 0)
       });
   };
 

@@ -1,7 +1,12 @@
 import { axiosApiInstance } from "./helper";
 
-const getCategory = async () => {
-    return axiosApiInstance.get("category").then(
+const getCategory = async (id = null) => {
+    let API = "category"
+    if (id != null) {
+        API = API + id
+
+    }
+    return axiosApiInstance.get(API).then(
         (response) => {
             return response.data;
         }
@@ -13,8 +18,31 @@ const getCategory = async () => {
 
 };
 
-const getColor = async () => {
-    return axiosApiInstance.get("color").then(
+const getColor = async (id = null) => {
+    let API = "color"
+    if (id != null) {
+        API = API + id
+
+    }
+    return axiosApiInstance.get(API).then(
+        (response) => {
+            return response.data;
+        }
+    ).catch(
+        (error) => {
+            return null;
+        }
+    )
+
+};
+
+const getProduct = async (id = null) => {
+    let API = "product"
+    if (id != null) {
+        API = API + id
+
+    }
+    return axiosApiInstance.get(API).then(
         (response) => {
             return response.data;
         }
@@ -28,29 +56,5 @@ const getColor = async () => {
 
 
 
-const getCategoryById = async (id) => {
-    return axiosApiInstance.get(`category/${id}`).then(
-        (response) => {
-            return response.data;
-        }
-    ).catch(
-        (error) => {
-            return null;
-        }
-    )
-};
 
-
-const getColorById = async (id) => {
-    return axiosApiInstance.get(`color/${id}`).then(
-        (response) => {
-            return response.data;
-        }
-    ).catch(
-        (error) => {
-            return null;
-        }
-    )
-};
-
-export { getCategory, getCategoryById, getColorById, getColor };
+export { getCategory, getColor, getProduct };

@@ -2,7 +2,7 @@
 import { useRef, useEffect, use, useState } from 'react';
 import Link from 'next/link';
 import { axiosApiInstance, createSlug, notify } from '@/app/library/helper';
-import { getCategoryById } from '@/app/library/api-call';
+import { getCategory } from '@/app/library/api-call';
 
 export default function EditCategoryPage({ params }) {
   const [category, setCategory] = useState(null);
@@ -34,7 +34,7 @@ export default function EditCategoryPage({ params }) {
   };
 
   async function getdataById() {
-    const categoryJSON = await getCategoryById(params.category_id);
+    const categoryJSON = await getCategory(params.category_id);
     const data = categoryJSON?.categories;
     setCategory(data)
 

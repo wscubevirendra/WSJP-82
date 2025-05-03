@@ -1,51 +1,34 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 import { FaPlus } from 'react-icons/fa';
-import { axiosApiInstance, createSlug } from '@/app/library/helper';
+import { axiosApiInstance, createSlug, notify } from '@/app/library/helper';
 import Select from 'react-select'
+import { getCategory, getColor } from '@/app/library/api-call';
+import RichTextEditor from '@/component/admin/RichTextEditor';
 
 export default function AddProductForm() {
   const [category, setCategory] = useState();
   const [color, setColor] = useState();
   const [selColors, setSelColors] = useState([])
+  const [description, setDescription] = useState("")
   const nameRef = useRef();
   const slugRef = useRef();
   const originalPriceRef = useRef();
   const discountPriceRef = useRef();
   const finalPriceRef = useRef();
 
-  const fetchData = () => {
-    axiosApiInstance.get("category").then(
-      (response) => {
-        if (response.data.flag == 1) {
-          setCategory(response?.data?.categories)
-        }
-      }
-    ).catch(
-      () => {
-        setCategory([])
+  const fetchData = async () => {
+    const categoryJSON = await getCategory();
+    const categories = await categoryJSON?.categories
+    setCategory(categories)
 
-      }
 
-    )
+    const colorJSON = await getColor();
+    const colors = await colorJSON?.colors
+    setColor(colors)
   }
 
 
-  const fetchColor = () => {
-    axiosApiInstance.get("color").then(
-      (response) => {
-        if (response.data.flag == 1) {
-          setColor(response?.data?.colors)
-        }
-      }
-    ).catch(
-      () => {
-        setColor([])
-
-      }
-
-    )
-  }
 
 
 
@@ -70,10 +53,11 @@ export default function AddProductForm() {
   const submitHandler = (e) => {
     e.preventDefault();
     const formData = new FormData();
+
     formData.append("name", nameRef.current.value);
     formData.append("slug", slugRef.current.value);
     formData.append("shortDescription", e.target.shortDesc.value);
-    formData.append("longDescription", e.target.longDesc.value);
+    formData.append("longDescription", description)
     formData.append("originalPrice", originalPriceRef.current.value);
     formData.append("discountPercentage", discountPriceRef.current.value);
     formData.append("finalPrice", finalPriceRef.current.value);
@@ -83,12 +67,18 @@ export default function AddProductForm() {
 
     axiosApiInstance.post("product/create", formData).then(
       (response) => {
-        console.log(response)
+        notify(response.data.msg, response.data.flag)
+        if (response.data.flag === 1) {
+          e.target.reset()
+          setDescription("")
+          
+
+        }
       }
 
     ).catch(
       (err) => {
-        console.log(err)
+        notify("Something went wrong", 0)
       }
     )
 
@@ -100,7 +90,7 @@ export default function AddProductForm() {
   useEffect(
     () => {
       fetchData()
-      fetchColor()
+
     },
     []
   )
@@ -249,13 +239,11 @@ export default function AddProductForm() {
             <label htmlFor="longDesc" className="text-sm font-medium text-gray-700">
               Long Description
             </label>
-            <textarea
-              id="longDesc"
-              name="longDesc"
-              rows="6"
-              placeholder="Detailed information about the product"
-              className="mt-1 block w-full rounded-xl border-gray-300 shadow-sm focus:ring-blue-600 focus:border-blue-600 p-3"
-            ></textarea>
+            <RichTextEditor value={description} changeHandler={
+              (desc) => {
+                setDescription(desc)
+              }
+            } />
           </div>
 
           <div>

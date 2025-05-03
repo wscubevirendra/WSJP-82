@@ -2,7 +2,7 @@
 import { useRef, useEffect, use, useState } from 'react';
 import Link from 'next/link';
 import { axiosApiInstance, createSlug, notify } from '@/app/library/helper';
-import { getCategoryById, getColorById } from '@/app/library/api-call';
+import { getColor } from '@/app/library/api-call';
 
 export default function EditCategoryPage({ params }) {
   const [color, setColor] = useState(null);
@@ -35,7 +35,7 @@ export default function EditCategoryPage({ params }) {
       });
   };
   async function getdataById() {
-    const colorJSON = await getColorById(params?.color_id);
+    const colorJSON = await getColor(params?.color_id);
     const data = colorJSON?.colors;
     setColor(data)
   }

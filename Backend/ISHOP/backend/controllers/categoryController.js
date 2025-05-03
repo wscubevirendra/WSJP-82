@@ -52,19 +52,15 @@ const categoryController = {
 
     async read(req, res) {
         try {
-            const categories = await CategoryModel.find().sort({ createdAt: -1 });
-            res.send({ msg: "Categories find", categories, total: categories.length, flag: 1 })
+            const id = req.params.id;
+            let categories = null;
+            if (id) {
+                categories = await CategoryModel.findById(id);
+            } else {
+                categories = await CategoryModel.find().sort({ createdAt: -1 });
+            }
 
-        } catch (error) {
-            res.send({ msg: "Internal Server Error", flag: 0 })
-        }
 
-    },
-
-    async readById(req, res) {
-        try {
-            const categoryId = req.params.id;
-            const categories = await CategoryModel.findById(categoryId)
             res.send({ msg: "Categories find", categories, flag: 1 })
 
         } catch (error) {
@@ -130,7 +126,7 @@ const categoryController = {
 
     async update(req, res) {
         try {
-        
+
             const categoryId = req.params.id;
             await CategoryModel.findByIdAndUpdate(
                 {

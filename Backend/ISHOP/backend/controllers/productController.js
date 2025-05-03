@@ -1,5 +1,6 @@
 const { generateUniqueName } = require("../helper");
 const ProductModel = require("../models/ProductModel");
+const { unlinkSync } = require('fs')
 
 
 const productController = {
@@ -44,7 +45,110 @@ const productController = {
             res.send({ msg: "Internal Server Error", flag: 0 })
 
         }
-    }
+    },
+    async read(req, res) {
+        try {
+            const id = req.params.id;
+            let products = null;
+            if (id) {
+                products = await ProductModel.findById(id);
+            } else {
+                products = await ProductModel.find().sort({ createdAt: -1 });
+            }
+
+
+            res.send({ msg: "Product find", products, total: Array.isArray(products) ? products.length : 1, flag: 1 })
+
+        } catch (error) {
+            res.send({ msg: "Internal Server Error", flag: 0 })
+        }
+
+    },
+    async status(req, res) {
+        try {
+            const id = req.params.id;
+            const flag = req.body.flag;
+            const product = await ProductModel.findById(id);
+            let message;
+            if (product) {
+                const productStatus = {};
+                if (flag == 1) {
+                    productStatus.topSelling = !product.topSelling;
+                    message = "Top Selling Update"
+                } else if (flag == 2) {
+                    productStatus.stock = !product.stock
+                    message = "Stock Update"
+
+                } else if (flag == 3) {
+                    productStatus.status = !product.status
+                    message = "Status Update"
+
+                }
+
+                console.log(productStatus)
+
+
+                await ProductModel.updateOne(
+                    {
+                        _id: id
+                    },
+                    {
+                        $set: productStatus
+                    }
+                ).then(
+                    () => {
+                        res.send({ msg: message, flag: 1 })
+
+                    }
+                ).catch(
+                    () => {
+                        res.send({ msg: "Unable to update Status", flag: 0 })
+                    }
+                )
+
+
+            } else {
+                res.send({ msg: "Unable to find product", flag: 0 })
+            }
+
+        } catch (error) {
+            res.send({ msg: "Internal Server Error", flag: 0 })
+        }
+
+    },
+    async delete(req, res) {
+        try {
+            const id = req.params.id;
+            const product = await ProductModel.findById(id);
+            if (product) {
+                await ProductModel.deleteOne({ _id: id }).then(
+                    () => {
+                        const imagePath = `./public/images/product/${product.thumbnail}`;
+                        unlinkSync(imagePath)
+                        res.send({ msg: "Product deleted ", flag: 1 })
+
+                    }
+                ).catch(
+                    (error) => {
+                        console.log(error)
+                        res.send({ msg: "Unable to deleted product   ", flag: 0 })
+
+                    }
+                )
+
+            } else {
+                res.send({ msg: "product not found ", flag: 0 })
+            }
+
+        } catch (error) {
+            res.send({ msg: "Internal Server Error", flag: 0 })
+
+        }
+    },
+
+
+
+
 }
 
 module.exports = productController;

@@ -33,20 +33,16 @@ const colorController = {
 
     async read(req, res) {
         try {
-            const colors = await ColorModel.find().sort({ createdAt: -1 });
-            res.send({ msg: "Colors find", colors, total: colors.length, flag: 1 })
-        } catch (error) {
-            res.send({ msg: "Internal Server Error", flag: 0 })
-        }
+            const id = req.params.id;
+            let colors = null;
+            if (id) {
+                colors = await ColorModel.findById(id)
 
-    },
+            } else {
+                colors = await ColorModel.find().sort({ createdAt: -1 });
+            }
 
-    async readById(req, res) {
-        try {
-            const colorId = req.params.id;
-            const colors = await ColorModel.findById(colorId)
-            res.send({ msg: "Color find", colors, flag: 1 })
-
+            res.send({ msg: "Colors find", colors, flag: 1 })
         } catch (error) {
             res.send({ msg: "Internal Server Error", flag: 0 })
         }
