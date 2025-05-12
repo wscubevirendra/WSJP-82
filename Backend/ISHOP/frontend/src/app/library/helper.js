@@ -18,7 +18,14 @@ function createSlug(text) {
         .replace(/-+$/, ''); // Trim - from end of text
 }
 
+function getCookies(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+    return null;
+}
+
 const notify = (msg, flag) => toast(msg, { type: flag ? "success" : "error" });
 
 
-export { createSlug, notify, axiosApiInstance };
+export { createSlug, notify, axiosApiInstance, getCookies };

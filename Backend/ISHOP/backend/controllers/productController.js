@@ -145,6 +145,44 @@ const productController = {
 
         }
     },
+    async multipleImage(req, res) {
+
+        try {
+            const id = req.params.id;
+            const images = req.files.image
+            console.log(images)
+            const product = await ProductModel.findById(id);
+            if (!product) {
+                res.send({ msg: "product not found ", flag: 0 })
+            }
+
+            let allimages = product.images ?? [];
+            let uplaodPromise = [];
+
+            for (let image of images) {
+                const img = generateUniqueName(image.name);
+                const desntinationPath = `./public/images/product/${img}`;
+                allimages.push(img)
+                uplaodPromise.push(image.mv(desntinationPath))
+
+            }
+
+            await Promise.all(uplaodPromise)
+            await ProductModel.updateOne(
+                { _id: id },
+                {
+                    images: allimages
+                }
+            )
+            await res.send({ msg: "Product image upload ", flag: 1 })
+
+
+        } catch (error) {
+            console.log(error)
+            res.send({ msg: "Internal Server Error", flag: 0 })
+
+        }
+    },
 
 
 

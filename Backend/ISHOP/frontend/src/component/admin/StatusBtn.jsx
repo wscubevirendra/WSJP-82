@@ -1,12 +1,17 @@
 'use client'
-import { axiosApiInstance, notify } from '@/app/library/helper'
+import { axiosApiInstance, getCookies, notify } from '@/app/library/helper'
 import React from 'react'
 import { useRouter } from 'next/navigation'
 
 export default function StatusBtn({ status, statusURl }) {
     const router = useRouter()
+    const token = getCookies("admin_token")
     function handleStatusChange() {
-        axiosApiInstance.patch(statusURl).then(
+        axiosApiInstance.patch(statusURl, null, {
+            headers: {
+                Authorization: token ?? ""
+            }
+        }).then(
             (response) => {
                 notify(response.data.msg, response.data.flag)
                 if (response.data.flag === 1) {
@@ -17,7 +22,7 @@ export default function StatusBtn({ status, statusURl }) {
             }
         ).catch(
             (error) => {
-                console.log(error,"hiiiiiiiii")
+                console.log(error, "hiiiiiiiii")
                 notify("Something went wrong", 0)
             }
         )

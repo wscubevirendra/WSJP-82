@@ -1,13 +1,18 @@
 'use client'
 import React from 'react'
-import { axiosApiInstance ,notify} from '@/app/library/helper';
+import { axiosApiInstance, getCookies, notify } from '@/app/library/helper';
 import { FiTrash2 } from "react-icons/fi";
 import { useRouter } from 'next/navigation';
 
 export default function DeleteBtn({ deleteURL }) {
     const router = useRouter();
+    const token = getCookies('admin_token')
     function handleDelete() {
-        axiosApiInstance.delete(deleteURL).then(
+        axiosApiInstance.delete(deleteURL, {
+            headers: {
+                Authorization: token ?? ""
+            }
+        }).then(
             (response) => {
                 notify(response.data.msg, response.data.flag)
                 if (response.data.flag === 1) {
