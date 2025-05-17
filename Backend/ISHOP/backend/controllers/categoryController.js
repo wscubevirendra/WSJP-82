@@ -1,5 +1,6 @@
 const { generateUniqueName } = require("../helper");
 const CategoryModel = require("../models/categoryModel");
+const ProductModel = require("../models/ProductModel");
 const fs = require("fs");
 
 const categoryController = {
@@ -53,21 +54,35 @@ const categoryController = {
     async read(req, res) {
         try {
             const id = req.params.id;
-            let categories = null;
+            let data = [];
+
             if (id) {
-                categories = await CategoryModel.findById(id);
+                const categories = await CategoryModel.findById(id);
+                return res.send({ msg: "Categories find", categories, flag: 1 });
             } else {
-                categories = await CategoryModel.find().sort({ createdAt: -1 });
+                const categories = await CategoryModel.find().sort({ createdAt: -1 });
+
+                const allPromise = categories.map(async (cat) => {
+                    const productCount = await ProductModel.countDocuments({ categoryId: cat._id });
+
+                    // Convert Mongoose document to plain object before spreading
+                    data.push({
+                        ...cat.toJSON(),
+                        productCount,
+                    });
+                });
+
+                await Promise.all(allPromise); // ✅ wait here
+
+                return res.send({ msg: "Categories find", categories: data, flag: 1 });
             }
 
-
-            res.send({ msg: "Categories find", categories, flag: 1 })
-
         } catch (error) {
-            res.send({ msg: "Internal Server Error", flag: 0 })
+            console.log(error);
+            return res.send({ msg: "Internal Server Error", flag: 0 });
         }
-
-    },
+    }
+,
 
 
     async delete(req, res) {

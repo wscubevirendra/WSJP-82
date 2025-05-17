@@ -3,6 +3,7 @@ import "../globals.css";
 import SideMenu from "@/component/admin/SideMenu";
 import Header from "@/component/admin/Header";
 import { ToastContainer } from 'react-toastify';
+import StoreProvider from "@/component/StoreProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -22,33 +23,36 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <ToastContainer
-          position="top-right"
-          autoClose={1000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick={false}
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="colored"
-        />
+      <StoreProvider>
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        >
+          <ToastContainer
+            position="top-right"
+            autoClose={1000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick={false}
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="colored"
+          />
 
-        {/* Fixed Sidebar */}
-        <SideMenu />
+          {/* Fixed Sidebar */}
+          <SideMenu />
 
-        {/* Main Content: add margin-left same as sidebar width */}
-        <div className="ml-64">
-          <Header />
-          <div className="p-4 bg-gray-100 min-h-screen">
-            {children}
+          {/* Main Content: add margin-left same as sidebar width */}
+          <div className="ml-64">
+            <Header />
+            <div className="p-4 bg-gray-100 min-h-screen">
+              {children}
+            </div>
           </div>
-        </div>
-      </body>
+        </body>
+      </StoreProvider>
+
     </html>
   );
 }

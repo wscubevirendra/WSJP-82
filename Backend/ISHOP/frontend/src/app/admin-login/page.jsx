@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { axiosApiInstance } from '../library/helper';
 import { useRouter } from 'next/navigation';
 
+
 const AdminLoginPage = () => {
     const router = useRouter()
     const handleSubmit = (e) => {
@@ -16,7 +17,10 @@ const AdminLoginPage = () => {
             (response) => {
                 console.log(response)
                 if (response.data.flag === 1) {
+                    localStorage.setItem("admin", JSON.stringify(response.data.admin));
+                    localStorage.setItem("loginAt", new Date());
                     router.push("/admin")
+
                 }
 
             }
