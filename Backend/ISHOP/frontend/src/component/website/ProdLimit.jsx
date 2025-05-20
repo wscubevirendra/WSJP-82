@@ -18,7 +18,7 @@ export default function ProdLimit() {
     return (
         <div className='w-full p-4 shadow bg-gray'>
             <select onChange={(e) => setLimit(e.target.value)} name="" id="">
-                <option value="1">1</option>
+                <option value="0">All</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
                 <option value="4">4</option>

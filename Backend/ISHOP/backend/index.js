@@ -7,6 +7,7 @@ const CategoryRouter = require('./routers/categoryRouter');
 const ColorRouter = require('./routers/colorRouter');
 const ProductRouter = require('./routers/productRouter');
 const AdminRouter = require('./routers/adminRouter');
+const UserRouter = require('./routers/userRouter');
 const server = express();
 server.use(express.static("public")) // Serve static files from the public directory
 
@@ -18,6 +19,7 @@ server.use("/category", CategoryRouter)
 server.use("/color", ColorRouter)
 server.use("/product", ProductRouter)
 server.use("/admin", AdminRouter)
+server.use("/user", UserRouter)
 
 // MongoDB Connection
 mongoose.connect(process.env.MONGODB_URL, {

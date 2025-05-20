@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { FaShoppingCart } from "react-icons/fa";
 import { getProduct } from "@/app/library/api-call";
+import AddToCart from "@/component/website/AddToCart";
 
 const StorePage = () => {
     const searchParams = useSearchParams();
@@ -69,10 +70,7 @@ const StorePage = () => {
                                     </div>
                                 </div>
                             </div>
-                            <button className="flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white px-5 py-2.5 rounded-full text-sm font-medium transition-all shadow-md">
-                                <FaShoppingCart className="text-base" />
-                                Add to Cart
-                            </button>
+                            <AddToCart product={product} />
                         </div>
                     </div>
                 ))
