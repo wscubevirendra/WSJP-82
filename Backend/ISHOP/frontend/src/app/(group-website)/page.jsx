@@ -1,3 +1,4 @@
+import AddToCart from "@/component/website/AddToCart";
 import { getProduct } from "../library/api-call";
 import { FaShoppingCart } from "react-icons/fa";
 
@@ -54,10 +55,7 @@ const StorePage = async () => {
                                     </div>
                                 </div>
                             </div>
-                            <button className="flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white px-5 py-2.5 rounded-full text-sm font-medium transition-all shadow-md">
-                                <FaShoppingCart className="text-base" />
-                                Add to Cart
-                            </button>
+                            <AddToCart />
                         </div>
                     </div>
                 ))

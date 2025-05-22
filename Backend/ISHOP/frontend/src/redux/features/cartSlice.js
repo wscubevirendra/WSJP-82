@@ -31,10 +31,10 @@ export const cartSlice = createSlice({
         },
         lsToCart(state, current) {
             const lsCart = JSON.parse(localStorage.getItem("cart"));
-            if (lsAdmin) {
-                state.items = lsAdmin.items;
-                state.final_total = lsAdmin.final_price;
-                state.original_total = lsAdmin.original_price;
+            if (lsCart) {
+                state.items = lsCart.items;
+                state.final_total = lsCart.final_total;
+                state.original_total = lsCart.original_total;
             }
 
 

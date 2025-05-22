@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { getProduct } from "@/app/library/api-call";
 import { lsToCart } from "@/redux/features/cartSlice";
 import { useRouter } from "next/navigation";
+import { logoutUser, lsToUser } from "@/redux/features/userSlice";
 
 
 export default function Header() {
@@ -16,7 +17,9 @@ export default function Header() {
   const [toggle, setToggle] = useState(false);
   const [products, setProducts] = useState([]);
   const cart = useSelector((state) => state.cart);
+  const user = useSelector((state) => state.user);
   const dispatcher = useDispatch()
+  console.log(user, "user")
 
   async function getproduct() {
     const response = await getProduct();
@@ -28,6 +31,7 @@ export default function Header() {
     () => {
       getproduct(null);
       dispatcher(lsToCart())
+      dispatcher(lsToUser())
     },
     []
   )
@@ -38,8 +42,19 @@ export default function Header() {
 
 
   function checkoutHandler() {
-    console.log("hello")
+    if (user?.data) {
+      router.push("/checkout")
+    } else {
+      router.push("/login?ref=checkout")
+    }
 
+
+  }
+
+
+  function logoutHandler() {
+    dispatcher(logoutUser());
+    router.push("/login")
   }
 
   return (
@@ -178,10 +193,30 @@ export default function Header() {
         {/* Right Side */}
         <div className="flex items-center gap-6">
           <div className="text-right">
-            <div className="text-xs text-gray-500">WELCOME</div>
-            <div className="font-semibold cursor-pointer hover:underline">
-              LOG IN / REGISTER
-            </div>
+
+            {
+              user.data != null ?
+                <>
+                  <div className="text-xs text-gray-500">NAME</div>
+                  <div onClick={logoutHandler} className="font-semibold cursor-pointer hover:underline">
+                    LOGOUT
+                  </div>
+                </>
+
+                :
+                <>
+                  <div className="text-xs text-gray-500">WELCOME</div>
+                  <Link href="/login?ref=header">
+                    <div className="font-semibold cursor-pointer hover:underline">
+                      LOG IN / REGISTER
+                    </div>
+                  </Link>
+
+
+                </>
+            }
+
+
           </div>
 
           <div onClick={toggleHandler} className="relative flex items-center gap-2 cursor-pointer">

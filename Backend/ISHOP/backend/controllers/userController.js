@@ -15,11 +15,11 @@ const userController = {
             const encPassword = cryptr.encrypt(password);
 
             const user = await new UserModel({ name, email, password: encPassword })
-            var token = jwt.sign({ id: user._id }, process.env.SECRET_KEY, { expiresIn: "24h" });
+            var token = jwt.sign({ ...user.toJSON() }, process.env.SECRET_KEY, { expiresIn: "24h" });
 
             user.save().then(
                 () => {
-                    res.send({ msg: "Accound created ", flag: 1, user: { ...user.toJSON(), password: "", token } })
+                    res.send({ msg: "Accound created ", flag: 1, token, user: { ...user.toJSON(), password: "" } })
                 }
 
             ).catch(
@@ -45,9 +45,9 @@ const userController = {
             }
 
             if (password === cryptr.decrypt(user.password)) {
-                var token = jwt.sign({ id: user._id }, process.env.SECRET_KEY, { expiresIn: "1h" });
+                var token = jwt.sign({ ...user.toJSON() }, process.env.SECRET_KEY, { expiresIn: "1h" });
 
-                res.send({ msg: "Login succesfully", user: { ...user.toJSON(), password: "", token }, flag: 1 })
+                res.send({ msg: "Login succesfully", user: { ...user.toJSON(), password: "" }, token, flag: 1 })
             } else {
                 res.send({ msg: "Incorrect password", flag: 0 })
 

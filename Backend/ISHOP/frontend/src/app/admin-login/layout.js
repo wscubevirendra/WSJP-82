@@ -6,6 +6,7 @@ export const metadata = {
 import StoreProvider from '@/component/StoreProvider'
 import '../globals.css'
 
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
