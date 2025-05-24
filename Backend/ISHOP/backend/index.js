@@ -9,6 +9,7 @@ const ProductRouter = require('./routers/productRouter');
 const AdminRouter = require('./routers/adminRouter');
 const UserRouter = require('./routers/userRouter');
 const CartRouter = require('./routers/cartRouter');
+const OrderRouter = require('./routers/orderRouter');
 const server = express();
 server.use(express.static("public")) // Serve static files from the public directory
 
@@ -22,6 +23,7 @@ server.use("/product", ProductRouter)
 server.use("/admin", AdminRouter)
 server.use("/user", UserRouter)
 server.use("/cart", CartRouter)
+server.use("/order", OrderRouter)
 
 // MongoDB Connection
 mongoose.connect(process.env.MONGODB_URL, {

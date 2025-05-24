@@ -54,18 +54,18 @@ const AuthTabs = () => {
 
                     console.log(dbCart,final_total,original_total)
 
-                    // localStorage.setItem("cart", JSON.stringify({
-                    //    items: dbCart, final_total, original_total
-                    // }))
+                    localStorage.setItem("cart", JSON.stringify({
+                       items: dbCart, final_total, original_total
+                    }))
 
 
 
-                    // if (params.get("ref") === "checkout") {
-                    //     router.push("/checkout")
-                    // } else {
-                    //     router.push("/")
+                    if (params.get("ref") === "checkout") {
+                        router.push("/checkout")
+                    } else {
+                        router.push("/")
 
-                    // }
+                    }
 
                 }
 

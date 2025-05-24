@@ -21,10 +21,12 @@ export const cartSlice = createSlice({
             state.original_total += original_price;
             localStorage.setItem("cart", JSON.stringify(state))
         },
-        removeToCart: (state) => {
+        emptyCart: (state) => {
             state.items = null;
             state.final_total = 0
-            state.original_total = 0
+            state.original_total = 0;
+            localStorage.removeItem("cart");
+
         },
         qtyHandler(state) {
 
@@ -45,6 +47,6 @@ export const cartSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { addItem, removeToCart, qtyHandler, lsToCart } = cartSlice.actions
+export const { addItem, emptyCart, qtyHandler, lsToCart } = cartSlice.actions
 
 export default cartSlice.reducer
